@@ -198,51 +198,76 @@ const renderPipelineSummary = () => {
   `;
 };
 
-const renderSectorOverview = () => {
-  const tbody = document.querySelector('#sector-overview-table tbody');
-  tbody.innerHTML = dashboardData.sectors
-    .map(({ name, revenue, yoyYear, yoyMonth, clients, managingDirectors }) => {
-      const revenuePerClient = revenue / clients.total;
-      const revenuePerMd = revenue / managingDirectors;
-      return `
-        <tr>
-          <td>${name}</td>
-          <td>${millionFormatter(revenue)}</td>
-          <td>${createBadge(yoyYear)}</td>
-          <td>${createBadge(yoyMonth)}</td>
-          <td>${clients.total}</td>
-          <td>${clients.new}</td>
-          <td>${clients.uptier}</td>
-          <td>${millionFormatter(revenuePerClient, 1)}</td>
-          <td>${managingDirectors}</td>
-          <td>${millionFormatter(revenuePerMd, 1)}</td>
-        </tr>
-      `;
-    })
-    .join('');
-};
+const regionKeys = ["Europa", "América", "Asia Pacífico", "Oriente Medio"];
+const productKeys = ["GM", "IBF", "GTB"];
 
-const renderMatrixTable = (selector, extractor, summaryRowId) => {
-  const tbody = document.querySelector(`${selector} tbody`);
-  const summaryRow = summaryRowId ? document.getElementById(summaryRowId) : null;
-  const totals = {};
+const renderSectorMatrix = () => {
+  const tbody = document.querySelector('#sector-matrix-table tbody');
+  const totalRow = document.getElementById('sector-matrix-total');
+
+  let totalRevenue = 0;
+  let weightedYoY = 0;
+  let weightedMoM = 0;
+  let totalClients = 0;
+  let weightedClientGrowth = 0;
+  let totalNewClients = 0;
+  let totalUptiers = 0;
+  let totalManagingDirectors = 0;
+
+  const regionTotals = Object.fromEntries(regionKeys.map((key) => [key, 0]));
+  const productTotals = Object.fromEntries(productKeys.map((key) => [key, 0]));
 
   const rows = dashboardData.sectors
     .map((sector) => {
-      const values = extractor(sector);
-      const total = Object.values(values).reduce((sum, value) => sum + value, 0);
-      const cells = Object.entries(values)
-        .map(([key, value]) => {
-          totals[key] = (totals[key] || 0) + value;
-          return `<td>${millionFormatter(value)}</td>`;
+      const { name, revenue, yoyYear, yoyMonth, clients, managingDirectors, regions, products } = sector;
+
+      totalRevenue += revenue;
+      weightedYoY += revenue * yoyYear;
+      weightedMoM += revenue * yoyMonth;
+      totalClients += clients.total;
+      weightedClientGrowth += clients.total * clients.growth;
+      totalNewClients += clients.new;
+      totalUptiers += clients.uptier;
+      totalManagingDirectors += managingDirectors;
+
+      const regionCells = regionKeys
+        .map((region) => {
+          const value = regions[region] || 0;
+          regionTotals[region] += value;
+          return `<td class="numeric">${millionFormatter(value)}</td>`;
         })
         .join('');
 
+      const productCells = productKeys
+        .map((product) => {
+          const value = products[product] || 0;
+          productTotals[product] += value;
+          return `<td class="numeric">${millionFormatter(value)}</td>`;
+        })
+        .join('');
+
+      const regionTotal = regionKeys.reduce((sum, key) => sum + (regions[key] || 0), 0);
+      const productTotal = productKeys.reduce((sum, key) => sum + (products[key] || 0), 0);
+      const revenuePerClient = revenue / clients.total;
+      const revenuePerMd = revenue / managingDirectors;
+
       return `
         <tr>
-          <td>${sector.name}</td>
-          ${cells}
-          <td>${millionFormatter(total)}</td>
+          <th scope="row">${name}</th>
+          <td class="numeric">${millionFormatter(revenue)}</td>
+          <td>${createBadge(yoyYear)}</td>
+          <td>${createBadge(yoyMonth)}</td>
+          ${regionCells}
+          <td class="numeric">${millionFormatter(regionTotal)}</td>
+          ${productCells}
+          <td class="numeric">${millionFormatter(productTotal)}</td>
+          <td class="numeric">${clients.total}</td>
+          <td class="numeric">${clients.new}</td>
+          <td class="numeric">${clients.uptier}</td>
+          <td>${createBadge(clients.growth)}</td>
+          <td class="numeric">${millionFormatter(revenuePerClient, 1)}</td>
+          <td class="numeric">${managingDirectors}</td>
+          <td class="numeric">${millionFormatter(revenuePerMd, 1)}</td>
         </tr>
       `;
     })
@@ -250,44 +275,38 @@ const renderMatrixTable = (selector, extractor, summaryRowId) => {
 
   tbody.innerHTML = rows;
 
-  if (summaryRow) {
-    const summaryCells = Object.keys(extractor(dashboardData.sectors[0]))
-      .map((key) => `<td>${millionFormatter(totals[key] || 0)}</td>`)
-      .join('');
-    summaryRow.innerHTML = `<td>Total</td>${summaryCells}<td>${millionFormatter(
-      Object.values(totals).reduce((sum, value) => sum + value, 0)
-    )}</td>`;
-  }
-};
+  const yoyAverage = totalRevenue ? weightedYoY / totalRevenue : 0;
+  const momAverage = totalRevenue ? weightedMoM / totalRevenue : 0;
+  const clientGrowthAverage = totalClients ? weightedClientGrowth / totalClients : 0;
+  const totalRegionSum = regionKeys.reduce((sum, key) => sum + regionTotals[key], 0);
+  const totalProductSum = productKeys.reduce((sum, key) => sum + productTotals[key], 0);
+  const revenuePerClientTotal = totalClients ? totalRevenue / totalClients : 0;
+  const revenuePerMdTotal = totalManagingDirectors ? totalRevenue / totalManagingDirectors : 0;
 
-const renderClientBreakdown = () => {
-  const tbody = document.querySelector('#sector-client-table tbody');
-  const summaryRow = document.getElementById('client-summary-row');
-  const totals = { total: 0, new: 0, uptier: 0 };
-
-  tbody.innerHTML = dashboardData.sectors
-    .map(({ name, clients }) => {
-      totals.total += clients.total;
-      totals.new += clients.new;
-      totals.uptier += clients.uptier;
-      return `
-        <tr>
-          <td>${name}</td>
-          <td>${clients.total}</td>
-          <td>${clients.new}</td>
-          <td>${clients.uptier}</td>
-          <td>${createBadge(clients.growth)}</td>
-        </tr>
-      `;
-    })
+  const regionTotalsMarkup = regionKeys
+    .map((region) => `<td class="numeric">${millionFormatter(regionTotals[region])}</td>`)
     .join('');
 
-  summaryRow.innerHTML = `
-    <td>Total</td>
-    <td>${totals.total}</td>
-    <td>${totals.new}</td>
-    <td>${totals.uptier}</td>
-    <td>-</td>
+  const productTotalsMarkup = productKeys
+    .map((product) => `<td class="numeric">${millionFormatter(productTotals[product])}</td>`)
+    .join('');
+
+  totalRow.innerHTML = `
+    <th scope="row">Total</th>
+    <td class="numeric">${millionFormatter(totalRevenue)}</td>
+    <td>${createBadge(yoyAverage)}</td>
+    <td>${createBadge(momAverage)}</td>
+    ${regionTotalsMarkup}
+    <td class="numeric">${millionFormatter(totalRegionSum)}</td>
+    ${productTotalsMarkup}
+    <td class="numeric">${millionFormatter(totalProductSum)}</td>
+    <td class="numeric">${totalClients}</td>
+    <td class="numeric">${totalNewClients}</td>
+    <td class="numeric">${totalUptiers}</td>
+    <td>${createBadge(clientGrowthAverage)}</td>
+    <td class="numeric">${millionFormatter(revenuePerClientTotal, 1)}</td>
+    <td class="numeric">${totalManagingDirectors}</td>
+    <td class="numeric">${millionFormatter(revenuePerMdTotal, 1)}</td>
   `;
 };
 
@@ -339,10 +358,7 @@ const renderProjectStatus = () => {
 const initDashboard = () => {
   renderKpis();
   renderPipelineSummary();
-  renderSectorOverview();
-  renderMatrixTable('#sector-region-table', (sector) => sector.regions, 'region-summary-row');
-  renderMatrixTable('#sector-product-table', (sector) => sector.products, 'product-summary-row');
-  renderClientBreakdown();
+  renderSectorMatrix();
   renderPipelineDetail();
   renderProjectStatus();
 };
