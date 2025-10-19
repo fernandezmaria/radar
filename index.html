@@ -7,150 +7,208 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header class="page-header">
-        <div class="header-content">
-            <h1>Dashboard de Ingresos Bancarios</h1>
-            <p class="subtitle">KPIs, pipeline y distribución de ingresos por sector</p>
-        </div>
-    </header>
-
-    <main class="layout">
-        <section class="panel kpi-panel">
-            <h2>KPIs principales</h2>
-            <div class="kpi-grid" id="kpi-grid"></div>
-            <div class="pipeline-summary" id="pipeline-summary"></div>
-        </section>
-
-        <section class="panel">
-            <h2>Rendimiento por sector</h2>
-            <div class="table-wrapper">
-                <table id="sector-overview-table">
-                    <thead>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Ingresos (M€)</th>
-                            <th>YoY</th>
-                            <th>MoM</th>
-                            <th>Clientes</th>
-                            <th>Nuevos clientes</th>
-                            <th>Uptiers</th>
-                            <th>Ingresos por cliente (M€)</th>
-                            <th>Managing Directors</th>
-                            <th>Ingresos por MD (M€)</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+    <div class="app-shell">
+        <header class="page-header">
+            <div class="title-group">
+                <span class="eyebrow">Informe financiero</span>
+                <h1>Dashboard de ingresos bancarios</h1>
+                <p class="subtitle">Resumen ejecutivo de KPIs, pipeline y distribución por sector</p>
             </div>
-        </section>
-
-        <section class="panel">
-            <h2>Ingresos por sector y región</h2>
-            <div class="table-wrapper">
-                <table id="sector-region-table">
-                    <thead>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Europa</th>
-                            <th>América</th>
-                            <th>Asia Pacífico</th>
-                            <th>Oriente Medio</th>
-                            <th>Total sector</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot>
-                        <tr class="summary-row" id="region-summary-row"></tr>
-                    </tfoot>
-                </table>
+            <div class="header-actions">
+                <button type="button" class="ghost-btn">Compartir</button>
+                <button type="button" class="primary-btn">Exportar</button>
             </div>
-        </section>
+        </header>
 
-        <section class="panel">
-            <h2>Ingresos por sector y producto</h2>
-            <div class="table-wrapper">
-                <table id="sector-product-table">
-                    <thead>
-                        <tr>
-                            <th>Sector</th>
-                            <th>GM</th>
-                            <th>IBF</th>
-                            <th>GTB</th>
-                            <th>Total sector</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot>
-                        <tr class="summary-row" id="product-summary-row"></tr>
-                    </tfoot>
-                </table>
+        <section class="toolbar">
+            <div class="filters">
+                <label>
+                    Oficina
+                    <select>
+                        <option>Madrid</option>
+                        <option>Barcelona</option>
+                        <option>Lisboa</option>
+                    </select>
+                </label>
+                <label>
+                    Segmento
+                    <select>
+                        <option>Global</option>
+                        <option>Corporate</option>
+                        <option>Institucional</option>
+                    </select>
+                </label>
+                <label>
+                    Periodicidad
+                    <select>
+                        <option>Mes actual</option>
+                        <option>Último trimestre</option>
+                        <option>Último año</option>
+                    </select>
+                </label>
             </div>
+            <div class="period-tag">Actualizado a 25 de abril</div>
         </section>
 
-        <section class="panel">
-            <h2>Clientes por sector</h2>
-            <div class="table-wrapper">
-                <table id="sector-client-table">
-                    <thead>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Clientes totales</th>
-                            <th>Nuevos clientes</th>
-                            <th>Uptiers</th>
-                            <th>Crecimiento clientes</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot>
-                        <tr class="summary-row" id="client-summary-row"></tr>
-                    </tfoot>
-                </table>
-            </div>
-        </section>
+        <main class="dashboard-grid">
+            <section class="panel kpi-panel">
+                <div class="panel-header">
+                    <h2>KPIs principales</h2>
+                    <p class="panel-description">Total de ingresos, evolución YoY y % de budget por iniciativa</p>
+                </div>
+                <div class="kpi-grid" id="kpi-grid"></div>
+                <div class="pipeline-summary" id="pipeline-summary"></div>
+            </section>
 
-        <section class="panel">
-            <h2>Detalle Current Pipeline</h2>
-            <div class="table-wrapper">
-                <table id="pipeline-detail-table">
-                    <thead>
-                        <tr>
-                            <th>Sector</th>
-                            <th>Oportunidades abiertas</th>
-                            <th>Oportunidades cerradas</th>
-                            <th>Total oportunidades</th>
-                            <th>YoY oportunidades</th>
-                            <th>MoM oportunidades</th>
-                            <th>Ingresos generados (M€)</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+            <section class="panel" id="sector-overview">
+                <div class="panel-header">
+                    <h2>Rendimiento por sector</h2>
+                    <p class="panel-description">Ingresos, clientes y productividad de managing directors</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="sector-overview-table">
+                        <thead>
+                            <tr>
+                                <th>Sector</th>
+                                <th>Ingresos (M€)</th>
+                                <th>YoY</th>
+                                <th>MoM</th>
+                                <th>Clientes</th>
+                                <th>Nuevos clientes</th>
+                                <th>Uptiers</th>
+                                <th>Ingresos/cliente</th>
+                                <th>Managing Directors</th>
+                                <th>Ingresos/MD</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <section class="panel">
-            <h2>Status de proyectos actuales</h2>
-            <div class="table-wrapper">
-                <table id="project-status-table">
-                    <thead>
-                        <tr>
-                            <th>Proyecto</th>
-                            <th>Consumer</th>
-                            <th>Energy</th>
-                            <th>Industrials</th>
-                            <th>Infra</th>
-                            <th>TMT</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
-    </main>
+            <section class="panel" id="sector-region">
+                <div class="panel-header">
+                    <h2>Ingresos por sector y región</h2>
+                    <p class="panel-description">Comparativa de territorios dentro de cada sector</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="sector-region-table">
+                        <thead>
+                            <tr>
+                                <th>Sector</th>
+                                <th>Europa</th>
+                                <th>América</th>
+                                <th>Asia Pacífico</th>
+                                <th>Oriente Medio</th>
+                                <th>Total sector</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr class="summary-row" id="region-summary-row"></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
 
-    <footer class="page-footer">
-        <p>Datos simulados para uso demostrativo.</p>
-    </footer>
+            <section class="panel" id="sector-product">
+                <div class="panel-header">
+                    <h2>Ingresos por sector y producto</h2>
+                    <p class="panel-description">Distribución entre GM, IBF y GTB</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="sector-product-table">
+                        <thead>
+                            <tr>
+                                <th>Sector</th>
+                                <th>GM</th>
+                                <th>IBF</th>
+                                <th>GTB</th>
+                                <th>Total sector</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr class="summary-row" id="product-summary-row"></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel" id="sector-clientes">
+                <div class="panel-header">
+                    <h2>Clientes por sector</h2>
+                    <p class="panel-description">Totales, nuevos clientes y uptiers con crecimiento</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="sector-client-table">
+                        <thead>
+                            <tr>
+                                <th>Sector</th>
+                                <th>Clientes totales</th>
+                                <th>Nuevos clientes</th>
+                                <th>Uptiers</th>
+                                <th>Crecimiento clientes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr class="summary-row" id="client-summary-row"></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel" id="pipeline-detail">
+                <div class="panel-header">
+                    <h2>Detalle Current Pipeline</h2>
+                    <p class="panel-description">Oportunidades abiertas, cerradas e ingresos generados por sector</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="pipeline-detail-table">
+                        <thead>
+                            <tr>
+                                <th>Sector</th>
+                                <th>Abiertas</th>
+                                <th>Cerradas</th>
+                                <th>Total oportunidades</th>
+                                <th>YoY oportunidades</th>
+                                <th>MoM oportunidades</th>
+                                <th>Ingresos generados (M€)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel project-status" id="project-status">
+                <div class="panel-header">
+                    <h2>Status de proyectos actuales</h2>
+                    <p class="panel-description">Estado por sector de los cinco proyectos activos</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="project-status-table">
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Consumer</th>
+                                <th>Energy</th>
+                                <th>Industrials</th>
+                                <th>Infra</th>
+                                <th>TMT</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="page-footer">
+            <p>Datos simulados para uso demostrativo.</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
