@@ -330,10 +330,23 @@ th {
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.sector-matrix-table thead .group-heading {
+  color: var(--accent);
 }
 
 .sector-matrix-table thead tr:nth-child(2) th {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+}
+
+.sector-matrix-table thead tr:nth-child(3) th {
   font-size: 0.74rem;
+  color: var(--text-secondary);
 }
 
 .sector-matrix-table thead th[rowspan] {
@@ -348,11 +361,14 @@ th {
 
 .sector-matrix-table tbody td {
   white-space: nowrap;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .sector-matrix-table tfoot th,
 .sector-matrix-table tfoot td {
   font-weight: 700;
+  text-align: center;
 }
 
 .numeric {
@@ -360,8 +376,72 @@ th {
   font-variant-numeric: tabular-nums;
 }
 
-.sector-matrix-table .badge {
+.metric-cell {
+  min-width: 88px;
+}
+
+.metric-value {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.metric-meta {
+  margin-top: 4px;
+  display: flex;
   justify-content: center;
+  gap: 6px;
+}
+
+.metric-meta span {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--text-secondary);
+}
+
+.metric-meta .trend {
+  background: rgba(43, 110, 242, 0.12);
+  color: var(--accent);
+}
+
+.metric-meta .trend.positive {
+  background: rgba(26, 163, 102, 0.14);
+  color: var(--positive);
+}
+
+.metric-meta .trend.negative {
+  background: rgba(229, 72, 72, 0.16);
+  color: var(--negative);
+}
+
+.metric-meta .trend.neutral {
+  background: rgba(100, 116, 139, 0.16);
+  color: var(--neutral);
+}
+
+.metric-meta .budget {
+  background: rgba(43, 110, 242, 0.08);
+  color: var(--accent);
+}
+
+.metric-meta .budget.positive {
+  background: rgba(26, 163, 102, 0.14);
+  color: var(--positive);
+}
+
+.metric-meta .budget.negative {
+  background: rgba(229, 72, 72, 0.16);
+  color: var(--negative);
+}
+
+.metric-meta .budget.neutral {
+  background: rgba(100, 116, 139, 0.16);
+  color: var(--neutral);
 }
 
 .status-cell {

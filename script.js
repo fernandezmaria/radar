@@ -14,82 +14,117 @@ const dashboardData = {
   sectors: [
     {
       name: "Consumer",
-      revenue: 245,
-      yoyYear: 7.1,
-      yoyMonth: 1.8,
-      clients: { total: 68, growth: 5.2, new: 14, uptier: 9 },
-      managingDirectors: 6,
+      revenue: { value: 402, yoy: 7.2, budget: 93 },
       regions: {
-        Europa: 102,
-        América: 62,
-        "Asia Pacífico": 48,
-        "Oriente Medio": 33
+        us: { value: 110, yoy: 6.8, budget: 94 },
+        mexico: { value: 42, yoy: 5.1, budget: 92 },
+        spain: { value: 98, yoy: 7.4, budget: 95 },
+        europe: { value: 72, yoy: 6.2, budget: 91 },
+        ads: { value: 44, yoy: 4.9, budget: 93 },
+        asia: { value: 36, yoy: 5.5, budget: 90 }
       },
-      products: { GM: 96, IBF: 84, GTB: 65 },
+      products: {
+        gtb: { value: 134, yoy: 5.6, budget: 94 },
+        ibf: { value: 138, yoy: 6.3, budget: 95 },
+        gm: { value: 130, yoy: 7.2, budget: 92 }
+      },
+      clients: {
+        total: { value: 184, yoy: 6.5, budget: 94 },
+        new: { value: 18, yoy: 9.1, budget: 90 },
+        uptiers: { value: 130, yoy: 4.8, budget: 92 }
+      },
       pipeline: { open: 28, closed: 14, yoy: 7.5, mom: 1.9, revenue: 38 }
     },
     {
       name: "Energy",
-      revenue: 198,
-      yoyYear: 9.3,
-      yoyMonth: 2.1,
-      clients: { total: 54, growth: 4.4, new: 11, uptier: 7 },
-      managingDirectors: 5,
+      revenue: { value: 340, yoy: 8.4, budget: 91 },
       regions: {
-        Europa: 88,
-        América: 48,
-        "Asia Pacífico": 34,
-        "Oriente Medio": 28
+        us: { value: 98, yoy: 7.8, budget: 90 },
+        mexico: { value: 34, yoy: 5.6, budget: 92 },
+        spain: { value: 76, yoy: 8.1, budget: 93 },
+        europe: { value: 58, yoy: 6.9, budget: 89 },
+        ads: { value: 42, yoy: 7.3, budget: 90 },
+        asia: { value: 32, yoy: 5.8, budget: 88 }
       },
-      products: { GM: 74, IBF: 68, GTB: 56 },
+      products: {
+        gtb: { value: 116, yoy: 6.8, budget: 91 },
+        ibf: { value: 118, yoy: 8.2, budget: 92 },
+        gm: { value: 106, yoy: 7.5, budget: 90 }
+      },
+      clients: {
+        total: { value: 162, yoy: 5.7, budget: 93 },
+        new: { value: 16, yoy: 8.6, budget: 88 },
+        uptiers: { value: 112, yoy: 4.9, budget: 91 }
+      },
       pipeline: { open: 24, closed: 11, yoy: 6.4, mom: 1.6, revenue: 35 }
     },
     {
       name: "Industrials",
-      revenue: 287,
-      yoyYear: 5.9,
-      yoyMonth: 1.2,
-      clients: { total: 72, growth: 3.1, new: 12, uptier: 10 },
-      managingDirectors: 7,
+      revenue: { value: 263, yoy: 5.9, budget: 95 },
       regions: {
-        Europa: 118,
-        América: 76,
-        "Asia Pacífico": 56,
-        "Oriente Medio": 37
+        us: { value: 76, yoy: 4.8, budget: 96 },
+        mexico: { value: 24, yoy: 3.6, budget: 94 },
+        spain: { value: 58, yoy: 5.7, budget: 97 },
+        europe: { value: 46, yoy: 5.2, budget: 95 },
+        ads: { value: 30, yoy: 4.1, budget: 93 },
+        asia: { value: 29, yoy: 4.5, budget: 92 }
       },
-      products: { GM: 108, IBF: 96, GTB: 83 },
+      products: {
+        gtb: { value: 88, yoy: 4.9, budget: 96 },
+        ibf: { value: 92, yoy: 5.6, budget: 95 },
+        gm: { value: 83, yoy: 5.8, budget: 94 }
+      },
+      clients: {
+        total: { value: 143, yoy: 3.9, budget: 95 },
+        new: { value: 14, yoy: 6.2, budget: 92 },
+        uptiers: { value: 100, yoy: 3.4, budget: 94 }
+      },
       pipeline: { open: 32, closed: 16, yoy: 4.8, mom: 1.1, revenue: 42 }
     },
     {
       name: "Infra",
-      revenue: 176,
-      yoyYear: 6.7,
-      yoyMonth: 2.4,
-      clients: { total: 47, growth: 6.9, new: 9, uptier: 6 },
-      managingDirectors: 4,
+      revenue: { value: 273, yoy: 6.7, budget: 97 },
       regions: {
-        Europa: 74,
-        América: 42,
-        "Asia Pacífico": 31,
-        "Oriente Medio": 29
+        us: { value: 84, yoy: 6.1, budget: 98 },
+        mexico: { value: 32, yoy: 4.5, budget: 95 },
+        spain: { value: 61, yoy: 6.8, budget: 97 },
+        europe: { value: 46, yoy: 6.2, budget: 96 },
+        ads: { value: 27, yoy: 5.3, budget: 95 },
+        asia: { value: 23, yoy: 5.7, budget: 94 }
       },
-      products: { GM: 62, IBF: 58, GTB: 56 },
+      products: {
+        gtb: { value: 94, yoy: 5.9, budget: 97 },
+        ibf: { value: 96, yoy: 6.4, budget: 96 },
+        gm: { value: 83, yoy: 6.1, budget: 95 }
+      },
+      clients: {
+        total: { value: 158, yoy: 6.8, budget: 96 },
+        new: { value: 17, yoy: 9.4, budget: 91 },
+        uptiers: { value: 108, yoy: 5.7, budget: 95 }
+      },
       pipeline: { open: 21, closed: 9, yoy: 5.7, mom: 1.8, revenue: 28 }
     },
     {
       name: "TMT",
-      revenue: 334,
-      yoyYear: 10.8,
-      yoyMonth: 3.7,
-      clients: { total: 83, growth: 7.5, new: 18, uptier: 13 },
-      managingDirectors: 8,
+      revenue: { value: 202, yoy: 10.8, budget: 104 },
       regions: {
-        Europa: 146,
-        América: 92,
-        "Asia Pacífico": 62,
-        "Oriente Medio": 34
+        us: { value: 52, yoy: 9.5, budget: 103 },
+        mexico: { value: 18, yoy: 7.2, budget: 101 },
+        spain: { value: 56, yoy: 10.2, budget: 105 },
+        europe: { value: 38, yoy: 9.6, budget: 104 },
+        ads: { value: 19, yoy: 8.7, budget: 102 },
+        asia: { value: 19, yoy: 8.9, budget: 101 }
       },
-      products: { GM: 126, IBF: 112, GTB: 96 },
+      products: {
+        gtb: { value: 64, yoy: 9.1, budget: 104 },
+        ibf: { value: 68, yoy: 10.6, budget: 105 },
+        gm: { value: 70, yoy: 11.3, budget: 103 }
+      },
+      clients: {
+        total: { value: 162, yoy: 7.5, budget: 98 },
+        new: { value: 17, yoy: 11.2, budget: 94 },
+        uptiers: { value: 116, yoy: 6.8, budget: 97 }
+      },
       pipeline: { open: 36, closed: 19, yoy: 8.3, mom: 2.5, revenue: 47 }
     }
   ],
@@ -153,6 +188,12 @@ const millionFormatter = (value, fractionDigits = 0) =>
     maximumFractionDigits: fractionDigits
   })} M€`;
 
+const formatNumber = (value, fractionDigits = 0) =>
+  value.toLocaleString('es-ES', {
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits
+  });
+
 const formatPercentage = (value) => `${value > 0 ? '+' : ''}${value.toFixed(1)}%`;
 
 const createBadge = (value) => {
@@ -198,76 +239,109 @@ const renderPipelineSummary = () => {
   `;
 };
 
-const regionKeys = ["Europa", "América", "Asia Pacífico", "Oriente Medio"];
-const productKeys = ["GM", "IBF", "GTB"];
+const variationClass = (value) => (value > 0 ? 'positive' : value < 0 ? 'negative' : 'neutral');
+
+const budgetClass = (value) => {
+  if (value >= 100) return 'positive';
+  if (value <= 90) return 'negative';
+  return 'neutral';
+};
+
+const renderMetricCell = (metric, { fractionDigits = 0 } = {}) => {
+  if (!metric) {
+    return '<td class="metric-cell">-</td>';
+  }
+
+  const value = metric.value ?? 0;
+  const yoy = metric.yoy ?? 0;
+  const budget = metric.budget ?? 0;
+
+  return `
+    <td class="metric-cell">
+      <span class="metric-value">${formatNumber(value, fractionDigits)}</span>
+      <div class="metric-meta">
+        <span class="trend ${variationClass(yoy)}">YoY ${formatPercentage(yoy)}</span>
+        <span class="budget ${budgetClass(budget)}">vs Budget ${Math.round(budget)}%</span>
+      </div>
+    </td>
+  `;
+};
+
+const createAccumulator = () => ({ value: 0, yoy: 0, budget: 0 });
+
+const accumulateMetric = (accumulator, metric) => {
+  if (!metric) return accumulator;
+  const metricValue = metric.value ?? 0;
+  const metricYoy = metric.yoy ?? 0;
+  const metricBudget = metric.budget ?? 0;
+
+  accumulator.value += metricValue;
+  accumulator.yoy += metricValue * metricYoy;
+  accumulator.budget += metricValue * metricBudget;
+
+  return accumulator;
+};
+
+const finalizeAccumulator = (accumulator) => {
+  if (!accumulator.value) {
+    return { value: 0, yoy: 0, budget: 0 };
+  }
+
+  return {
+    value: accumulator.value,
+    yoy: accumulator.yoy / accumulator.value,
+    budget: accumulator.budget / accumulator.value
+  };
+};
+
+const regionConfig = [
+  { key: 'us', label: 'US' },
+  { key: 'mexico', label: 'Mexico' },
+  { key: 'spain', label: 'Spain' },
+  { key: 'europe', label: 'Europe' },
+  { key: 'ads', label: 'ADS' },
+  { key: 'asia', label: 'Asia' }
+];
+
+const productConfig = [
+  { key: 'gtb', label: 'GTB' },
+  { key: 'ibf', label: 'IBF' },
+  { key: 'gm', label: 'GM' }
+];
+
+const clientConfig = [
+  { key: 'total', label: 'Total' },
+  { key: 'new', label: 'New' },
+  { key: 'uptiers', label: 'Uptiers' }
+];
 
 const renderSectorMatrix = () => {
   const tbody = document.querySelector('#sector-matrix-table tbody');
   const totalRow = document.getElementById('sector-matrix-total');
 
-  let totalRevenue = 0;
-  let weightedYoY = 0;
-  let weightedMoM = 0;
-  let totalClients = 0;
-  let weightedClientGrowth = 0;
-  let totalNewClients = 0;
-  let totalUptiers = 0;
-  let totalManagingDirectors = 0;
-
-  const regionTotals = Object.fromEntries(regionKeys.map((key) => [key, 0]));
-  const productTotals = Object.fromEntries(productKeys.map((key) => [key, 0]));
+  const totalRevenue = createAccumulator();
+  const regionTotals = Object.fromEntries(regionConfig.map(({ key }) => [key, createAccumulator()]));
+  const productTotals = Object.fromEntries(productConfig.map(({ key }) => [key, createAccumulator()]));
+  const clientTotals = Object.fromEntries(clientConfig.map(({ key }) => [key, createAccumulator()]));
 
   const rows = dashboardData.sectors
     .map((sector) => {
-      const { name, revenue, yoyYear, yoyMonth, clients, managingDirectors, regions, products } = sector;
+      accumulateMetric(totalRevenue, sector.revenue);
+      regionConfig.forEach(({ key }) => accumulateMetric(regionTotals[key], sector.regions[key]));
+      productConfig.forEach(({ key }) => accumulateMetric(productTotals[key], sector.products[key]));
+      clientConfig.forEach(({ key }) => accumulateMetric(clientTotals[key], sector.clients[key]));
 
-      totalRevenue += revenue;
-      weightedYoY += revenue * yoyYear;
-      weightedMoM += revenue * yoyMonth;
-      totalClients += clients.total;
-      weightedClientGrowth += clients.total * clients.growth;
-      totalNewClients += clients.new;
-      totalUptiers += clients.uptier;
-      totalManagingDirectors += managingDirectors;
-
-      const regionCells = regionKeys
-        .map((region) => {
-          const value = regions[region] || 0;
-          regionTotals[region] += value;
-          return `<td class="numeric">${millionFormatter(value)}</td>`;
-        })
-        .join('');
-
-      const productCells = productKeys
-        .map((product) => {
-          const value = products[product] || 0;
-          productTotals[product] += value;
-          return `<td class="numeric">${millionFormatter(value)}</td>`;
-        })
-        .join('');
-
-      const regionTotal = regionKeys.reduce((sum, key) => sum + (regions[key] || 0), 0);
-      const productTotal = productKeys.reduce((sum, key) => sum + (products[key] || 0), 0);
-      const revenuePerClient = revenue / clients.total;
-      const revenuePerMd = revenue / managingDirectors;
+      const regionCells = regionConfig.map(({ key }) => renderMetricCell(sector.regions[key])).join('');
+      const productCells = productConfig.map(({ key }) => renderMetricCell(sector.products[key])).join('');
+      const clientCells = clientConfig.map(({ key }) => renderMetricCell(sector.clients[key])).join('');
 
       return `
         <tr>
-          <th scope="row">${name}</th>
-          <td class="numeric">${millionFormatter(revenue)}</td>
-          <td>${createBadge(yoyYear)}</td>
-          <td>${createBadge(yoyMonth)}</td>
+          <th scope="row">${sector.name}</th>
+          ${renderMetricCell(sector.revenue)}
           ${regionCells}
-          <td class="numeric">${millionFormatter(regionTotal)}</td>
           ${productCells}
-          <td class="numeric">${millionFormatter(productTotal)}</td>
-          <td class="numeric">${clients.total}</td>
-          <td class="numeric">${clients.new}</td>
-          <td class="numeric">${clients.uptier}</td>
-          <td>${createBadge(clients.growth)}</td>
-          <td class="numeric">${millionFormatter(revenuePerClient, 1)}</td>
-          <td class="numeric">${managingDirectors}</td>
-          <td class="numeric">${millionFormatter(revenuePerMd, 1)}</td>
+          ${clientCells}
         </tr>
       `;
     })
@@ -275,39 +349,14 @@ const renderSectorMatrix = () => {
 
   tbody.innerHTML = rows;
 
-  const yoyAverage = totalRevenue ? weightedYoY / totalRevenue : 0;
-  const momAverage = totalRevenue ? weightedMoM / totalRevenue : 0;
-  const clientGrowthAverage = totalClients ? weightedClientGrowth / totalClients : 0;
-  const totalRegionSum = regionKeys.reduce((sum, key) => sum + regionTotals[key], 0);
-  const totalProductSum = productKeys.reduce((sum, key) => sum + productTotals[key], 0);
-  const revenuePerClientTotal = totalClients ? totalRevenue / totalClients : 0;
-  const revenuePerMdTotal = totalManagingDirectors ? totalRevenue / totalManagingDirectors : 0;
+  const totalCells = [
+    renderMetricCell(finalizeAccumulator(totalRevenue)),
+    ...regionConfig.map(({ key }) => renderMetricCell(finalizeAccumulator(regionTotals[key]))),
+    ...productConfig.map(({ key }) => renderMetricCell(finalizeAccumulator(productTotals[key]))),
+    ...clientConfig.map(({ key }) => renderMetricCell(finalizeAccumulator(clientTotals[key])))
+  ].join('');
 
-  const regionTotalsMarkup = regionKeys
-    .map((region) => `<td class="numeric">${millionFormatter(regionTotals[region])}</td>`)
-    .join('');
-
-  const productTotalsMarkup = productKeys
-    .map((product) => `<td class="numeric">${millionFormatter(productTotals[product])}</td>`)
-    .join('');
-
-  totalRow.innerHTML = `
-    <th scope="row">Total</th>
-    <td class="numeric">${millionFormatter(totalRevenue)}</td>
-    <td>${createBadge(yoyAverage)}</td>
-    <td>${createBadge(momAverage)}</td>
-    ${regionTotalsMarkup}
-    <td class="numeric">${millionFormatter(totalRegionSum)}</td>
-    ${productTotalsMarkup}
-    <td class="numeric">${millionFormatter(totalProductSum)}</td>
-    <td class="numeric">${totalClients}</td>
-    <td class="numeric">${totalNewClients}</td>
-    <td class="numeric">${totalUptiers}</td>
-    <td>${createBadge(clientGrowthAverage)}</td>
-    <td class="numeric">${millionFormatter(revenuePerClientTotal, 1)}</td>
-    <td class="numeric">${totalManagingDirectors}</td>
-    <td class="numeric">${millionFormatter(revenuePerMdTotal, 1)}</td>
-  `;
+  totalRow.innerHTML = `<th scope="row">Total</th>${totalCells}`;
 };
 
 const renderPipelineDetail = () => {
